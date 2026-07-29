@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>提案文自動生成ツール</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card">
+  <header class="app-header">
+    <h1>提案文自動生成ツール</h1>
+    <p class="sub">クラウドワークス等の案件情報を貼り付けると、あなたのプロフィールを踏まえた提案文を下書きします</p>
+  </header>
+
+  <section class="tab-panel active">
+    <div class="field">
+      <label for="profile">あなたのプロフィール（実績・得意分野・トーンなど）</label>
+      <textarea id="profile" class="transcript-output" style="min-height:140px"
+        placeholder="例: Webライター歴2年。IT・美容ジャンルが得意。SEOを意識した構成が書けます。納期厳守。丁寧で読みやすい文章を心がけています。"></textarea>
+      <p class="hint">ここに入力した内容は自動保存され、次回以降も使われます。</p>
+    </div>
+
+    <div class="field">
+      <label for="api-key">Anthropic APIキー</label>
+      <input type="password" id="api-key" placeholder="sk-ant-...">
+      <label class="checkbox-label">
+        <input type="checkbox" id="remember-key">
+        このブラウザに保存する（このデバイスのlocalStorageにのみ保存され、外部には送信されません）
+      </label>
+    </div>
+
+    <div class="field">
+      <label for="model-select">モデル</label>
+      <select id="model-select">
+        <option value="claude-opus-5">claude-opus-5（高品質・高コスト）</option>
+        <option value="claude-sonnet-5">claude-sonnet-5（バランス・低コスト）</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="job-info">案件情報（タイトル・詳細・予算などをコピペ）</label>
+      <textarea id="job-info" class="transcript-output" style="min-height:180px"
+        placeholder="クラウドワークス等の案件ページの内容をそのまま貼り付けてください"></textarea>
+    </div>
+
+    <div class="controls">
+      <button id="btn-generate" class="btn btn-primary">提案文を生成</button>
+      <span id="status" class="status"></span>
+    </div>
+
+    <div class="field">
+      <label for="output">生成された提案文</label>
+      <textarea id="output" class="transcript-output" readonly
+        placeholder="ここに提案文の下書きが表示されます..."></textarea>
+    </div>
+
+    <div class="controls">
+      <button id="btn-copy" class="btn btn-ghost">コピー</button>
+      <button id="btn-download" class="btn btn-ghost">テキスト保存</button>
+    </div>
+  </section>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
